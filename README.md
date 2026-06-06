@@ -13,7 +13,7 @@ Zbiór danych zawiera szczegółowe wskaźniki dobowe dla pracowników. Kluczowe
 * `productivity_score` – ogólny wskaźnik produktywności (skala 0 - 100).
 * `deep_work_hours` – liczba godzin przepracowanych w głębokim skupieniu.
 * `sleep_hours` – dobowy czas snu w godzinach.
-* `physical_activity` / `Physical_Activity_Minutes` – czas aktywności fizycznej.
+* `physical_activity` – czas aktywności fizycznej.
 * `daily_screen_time`, `doomscrolling_duration` – wskaźniki obciążenia cyfrowego.
 
 ---
