@@ -20,7 +20,7 @@ Zbiór danych zawiera szczegółowe wskaźniki dobowe dla pracowników. Kluczowe
 
 ## 3. Struktura Projektu i Wyniki Hipotez
 
-### 📊 Wstępna Eksploracja Danych (Macierz Korelacji)
+### Wstępna Eksploracja Danych (Macierz Korelacji)
 Przed modelowaniem przefiltrowano macierz korelacji (współczynniki $|\pm 0.1|$). 
 * **Główni winowajcy wypalenia:** Wyczerpanie emocjonalne ($0.51$) oraz stres ($0.38$).
 * **Czynniki ochronne:** Satysfakcja z pracy ($-0.25$) oraz produktywność ($-0.38$).
@@ -28,13 +28,13 @@ Przed modelowaniem przefiltrowano macierz korelacji (współczynniki $|\pm 0.1|$
 
 ---
 
-### 💡 Hipoteza 1: Liniowy wpływ czynników na produktywność
+### Hipoteza 1: Liniowy wpływ czynników na produktywność
 * **Model:** Regresja Liniowa (Linear Regression).
 * **Wynik:** Potwierdzono stały wpływ kluczowych zmiennych na produktywność.
 
 ---
 
-### 💡 Hipoteza 2: Nieliniowy wpływ godzin głębokiej pracy (Deep Work)
+### Hipoteza 2: Nieliniowy wpływ godzin głębokiej pracy (Deep Work)
 * **Teza:** Istnienie "złotego środka", po przekroczeniu którego produktywność spada, a wypalenie drastycznie rośnie.
 * **Modele i Metryki:** Random Forest Regressor ($RMSE = 17.85$) vs Regresja Liniowa.
 * **Zwycięzca:** **Random Forest**, ponieważ lepiej wychwycił nieliniowe spłaszczenie trendu powyżej 8 godzin pracy.
@@ -42,14 +42,14 @@ Przed modelowaniem przefiltrowano macierz korelacji (współczynniki $|\pm 0.1|$
 
 ---
 
-### 💡 Hipoteza 3: Sen i sport jako "tarcza ochronna"
+### Hipoteza 3: Sen i sport jako "tarcza ochronna"
 * **Teza:** Aktywność fizyczna i zdrowy sen drastycznie obniżają wypalenie.
 * **Modele:** Istotność cech (Feature Importance) w Random Forest.
 * **Werdykt:** Hipoteza **w pełni potwierdzona**. Łączna istotność snu i sportu w modelu wyniosła aż **~85%** (sam sen to ok. 50% decyzyjności modelu), całkowicie dominując nad czasem pracy (15%). Regeneracja to klucz do braku wypalenia.
 
 ---
 
-### 💡 Hipoteza 4: Krzywoliniowy wpływ snu (Regresja Wielomianowa i Klasyfikacja)
+### Hipoteza 4: Krzywoliniowy wpływ snu (Regresja Wielomianowa i Klasyfikacja)
 * **Teza:** Zależność ma kształt paraboli (U-shape) – nadmiar snu też szkodzi. Dodatkowo sprawdzono możliwość klasyfikacji grupy ryzyka.
 * **Modele i Metryki:** Regresja Wielomianowa (Polynomial Degree 2) vs Regresja Liniowa oraz Drzewo Decyzyjne z optymalizacją **Grid Search**.
 * **Wyniki Regresji:** Krzywa wielomianowa automatycznie zredukowała się do linii prostej. **Zwycięzca: Regresja Liniowa** (zgodnie z zasadą brzytwy Ockhama – prostszy model przy identycznym dopasowaniu). Nadmiar snu nie szkodzi.
