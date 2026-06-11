@@ -58,12 +58,33 @@ Przed modelowaniem przefiltrowano macierz korelacji (współczynniki $|\pm 0.1|$
 
 ---
 
+### Hipoteza 5: Krzywoliniowy wpływ snu (Regresja Wielomianowa i Grid Search)
+* Teza: Zależność między snem a wypaleniem ma kształt paraboli (U-shape) — nadmiar snu też szkodzi.
+* Modele: Regresja Wielomianowa (Polynomial Degree 2) vs Regresja Liniowa + Drzewo Decyzyjne z optymalizacją Grid Search.
+* Wyniki Regresji: Krzywa wielomianowa zredukowała się automatycznie do linii prostej. Zwycięzca: Regresja Liniowa (prostszy model przy identycznym dopasowaniu).
+* Wyniki Klasyfikacji: Grid Search wskazał optymalną głębokość drzewa max_depth = 3, jednak F1-score = 0.00 dla klasy "Wypalony".
+* Werdykt: Hipoteza odrzucona. Sam czas snu to za mało na skuteczną klasyfikację grupy ryzyka.
+
+---
+
+### Hipoteza 6: Random Forest z optymalnymi hiperparametrami jako najlepszy model predykcyjny
+* Teza: Używając wszystkich dostępnych zmiennych (po standaryzacji i One Hot Encoding), Random Forest z automatycznie dobranymi hiperparametrami najlepiej przewiduje poziom wypalenia.
+* Modele i Metryki: Random Forest Regressor + Random Search (RMSE = 14.05).
+* Najlepsze hiperparametry: n_estimators = 100, max_depth = None, min_samples_split = 5.
+* Feature Importance: Największy wpływ mają czynniki psychologiczne — wyczerpanie emocjonalne (25.3%) i poziom stresu (15.6%). Aktywność fizyczna i sen mają zaskakująco mały wpływ (poniżej 3%).
+* Werdykt: Hipoteza potwierdzona. Użycie wszystkich zmiennych z standaryzacją i One Hot Encoding znacząco poprawiło jakość modelu (RMSE spadło z 21.52 do 14.05).
+
+---
+
 ## 4. Podsumowanie Techniczne
 W projekcie z powodzeniem zaimplementowano i porównano wymagane algorytmy:
-1. **Regresja Liniowa** (Linear Regression)
-2. **Regresja Wielomianowa** (Polynomial Regression)
-3. **Regresja Logistyczna** (Logistic Regression)
-4. **Drzewo Decyzyjne** (Decision Tree z GridSearchCV)
-5. **Lasy Losowe** (Random Forest - Regresor i Klasyfikator)
 
-Projekt udowodnił, że odrzucenie lub potwierdzenie hipotez za pomocą metryk ($RMSE$, $F1\text{-}score$) pozwala na wyciągnięcie realnych, wartościowych wniosków biznesowych w obszarze HR Tech.
+1. Regresja Liniowa (Linear Regression)
+2. Regresja Wielomianowa (Polynomial Regression)
+3. Regresja Logistyczna (Logistic Regression)
+4. Drzewo Decyzyjne (Decision Tree z GridSearchCV)
+5. Lasy Losowe (Random Forest — Regresor i Klasyfikator z RandomizedSearchCV)
+
+Dodatkowo zastosowano: standaryzację danych (StandardScaler), kodowanie zmiennych tekstowych (One Hot Encoding) oraz automatyczny dobór hiperparametrów (Grid Search, Random Search).
+
+Projekt udowodnił, że wypalenie zawodowe jest zjawiskiem przede wszystkim psychologicznym — dominującą rolę odgrywają wyczerpanie emocjonalne i poziom stresu, a nie sam fizyczny styl życia. Najlepszy model (Random Forest z optymalnymi hiperparametrami) osiągnął RMSE = 14.05, co stanowi poprawę o ponad 34% względem bazowej Regresji Liniowej (RMSE = 21.52).
